@@ -1,0 +1,26 @@
+
+
+
+
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/contactus.css' %}">
+</head>
+<body>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <label for="name">Name</label>
+      <input type="text" name="name" maxlength="50" required id="id_name">
+  
+      <label>Email Id</label>
+      <br>
+      <input type="email" name="email" maxlength="254" required id="id_email">
+      <br><br>
+      <label for="subject">Subject</label>
+      <textarea name="subject" cols="40" rows="10" required id="id_subject"></textarea>
+  
+      <input type="submit" value="Submit" onclick="contactus()">
+    </form>
+</body>
+

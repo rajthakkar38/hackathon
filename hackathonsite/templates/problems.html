@@ -1,0 +1,280 @@
+{% load static %}
+{% static "images" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Travello template project">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+  <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+    
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+    <title>Problem Statements</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/problems.css' %}">
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    
+    <!-- <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    </style> -->
+</head>
+
+<body>
+    
+  <div class="super_container" style="background: linear-gradient(135deg, #71b7e6, #9b59b6);">
+
+    <!-- Header -->
+
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+              <div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+                <div class="logo"><a href="{% url 'index' %}">Vishwa-Hackathon</a></div>
+                <nav class="main_nav">
+                  <ul class="d-flex flex-row align-items-start justify-content-start">
+                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                    
+
+                    {% if user.is_authenticated %}
+                      <li><a href="contactus">Contact</a></li>
+                      <li><a href="profile">Hello, {{user.first_name}}</a></a></li>
+                      {% if forms|length == 0 %}
+                        <li><a href="team_register">Team Register</a></li>
+                      {% endif %}
+                      <li><a href="problems">Problem Statements</a></li>
+                      <li><a href="logout">Logout</a></li>
+                    {% else %}
+                      <li><a href="register">Register</a></li>
+                      <li><a href="login">Login</a></li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                <!-- <div class="header_phone ml-auto">Call us: 00-56 445 678 33</div> -->
+
+                <!-- Hamburger -->
+
+                <div class="hamburger ml-auto">
+                  <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </header>
+
+    <!-- Menu -->
+
+    <div class="menu">
+      <div class="menu_header d-flex flex-row align-items-center justify-content-start">
+        <div class="menu_logo"><a href="index.html">Vishwa-Hackathon</a></div>
+        <div class="menu_close_container ml-auto">
+          <div class="menu_close">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="menu_content">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="profile">Hello, {{user.first_name}}</a></a></li>
+          {% if forms|length == 0 %}
+            <li><a href="team_register">Team Register</a></li>
+          {% endif %}
+            <li><a href="problems">Problem Statements</a></li>
+            <li><a href="logout">Logout</a></li>
+          {% else %}
+              <li><a href="register">Register</a></li>
+              <li><a href="login">Login</a></li>
+          {% endif %}
+          <li><a href="contactus">Contact</a></li>
+
+        </ul>
+      </div>
+      
+    </div>
+    
+
+     <!-- Home -->
+
+    <!-- <div class="home"> -->
+      <div  >
+        <br>
+        <br>
+        <br>
+        <br>
+                
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+           <main>
+              <table >
+                <thead>
+                  <tr>
+                    <th>
+                      Problem Id
+                    </th>
+                    <th>
+                      Title
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Upload
+                    </th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  {% for problem in problems %}
+                    <tr>
+                      <td>
+                        {{problem.problem_id}}
+                        <!-- VH_{{ forloop.counter }} -->
+                      </td>
+                      <td>
+                        {{problem.title}}
+                      </td>
+                      <td>
+                        {{problem.desc}}
+                      </td>
+                      <td>
+  
+  
+  
+                        <!-- <a value="{{ forloop.counter }}" onclick="call(({{problem.id}}))" class='button' href='#' style="text-decoration: none;">Select</a> -->
+                        <form class="container" method="post" enctype="multipart/form-data">
+    
+                          <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Submit Idea</button>
+                        
+                          <!-- Modal -->
+                          <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content" style="background-color: #202932;">
+                                <div class="modal-header">
+                                  <!-- <button type="button" class="close" data-dismiss="modal" style="background-color: #ffffff;">&times;</button> -->
+                                  <h4 class="modal-title">Upload Your Idea</h4>
+                                </div>
+                                <div class="modal-body">
+                                  
+                                  {{form.as_p}}
+                                  <input type="submit" value="Submit">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: whitesmoke;">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          
+                        </form>
+  
+  
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+                
+              </table> 
+              
+               
+                
+      </form>
+          
+      
+      </div>
+        <!-- </div> -->
+    </div>
+
+            <script src="{% static 'js/jquery-3.2.1.min.js' %}">
+            </script>
+            <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+            <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+            <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+            <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+            <script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+            <script src="{% static 'plugins/easing/easing.js' %}"></script>
+            <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+            <script src="{% static 'js/custom.js' %}"></script>
+
+                        
+                    </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ----------------------- -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statements</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/problems.css' %}">
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    
+</head>
+<body>
+  
+    
+  
+    <script>
+        $('.button, .close').on('click', function(e) {
+        e.preventDefault();
+        $('.detail, html, body').toggleClass('open');
+      });
+
+      
+    
+</body>
+</html> 

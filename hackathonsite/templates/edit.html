@@ -1,0 +1,207 @@
+{% load static %}
+{% if error %}
+    <div class="alert alert-danger text-danger" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body style="background-color: #eee;">
+
+
+
+
+  <div class="container" style="background-color: white;border-radius: 8px;border: 2px solid #333;">
+    <!-- added new div here -->
+    <h2 class="heading" style="padding: 1%;"><strong>Hackathon Registration</strong> Form <span></span></h2>
+    <hr>
+    <form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+
+  <div class="form-row">
+    <legend>Team Details </legend>
+      <div class="form-group col-md-4">
+          <label for="id_Team_name">Team name:</label> <input type="text" name="Team_name" value="{{ f1.Team_name }}" maxlength="50" required id="id_Team_name">
+      </div>
+
+  </div>
+</div>
+
+
+<br>
+
+
+<div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+  <div class="form-row">
+    <legend>Member1's Details</legend>
+      <br>
+      <div class="form-group col-md-4">
+      <label for="id_M1_Name">Name:</label> <input type="text" name="M1_Name" value="{{ f1.M1_Name }}" maxlength="100" required id="id_M1_Name">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M1_email">email:</label> <input type="email" name="M1_email" value="{{ f1.M1_email }}" maxlength="254" required id="id_M1_email">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M1_Mobile_no">Mobile no:</label> <input type="text" name="M1_Mobile_no" value="{{ f1.M1_Mobile_no }}" maxlength="10" required id="id_M1_Mobile_no">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M1_gender">Gender:</label> <select name="M1_gender" required id="id_M1_gender">
+          <option value="{{ f1.M1_gender }}" selected>{{ f1.M1_gender }}</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+  </div>
+</div>
+<br>
+
+<div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+  <div class="form-row">
+      <br>
+      <legend>Member2's Details</legend>
+      <div class="form-group col-md-4">
+        <label for="id_M2_Name">Name:</label> <input type="text" name="M2_Name" value="{{ f1.M2_Name }}" maxlength="100" required id="id_M2_Name">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M2_email">Email:</label> <input type="email" name="M2_email" value="{{ f1.M2_email }}" maxlength="254" required id="id_M2_email">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M2_Mobile_no">Mobile no:</label> <input type="text" name="M2_Mobile_no" value="{{ f1.M2_Mobile_no }}" maxlength="10" required id="id_M2_Mobile_no">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_M2_gender">Gender:</label> <select name="M2_gender" required id="id_M2_gender">
+          <option value="{{ f1.M2_gender }}" selected>{{ f1.M2_gender }}</option>
+          <option value="Male" >Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+  </div>
+  </div>
+  <br>
+
+  <div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+    <div class="form-row">
+        <br>
+        <legend>Member3's Details</legend>
+        <div class="form-group col-md-4">
+        <label for="id_M3_Name">Name:</label> <input type="text" name="M3_Name" value="{{ f1.M3_Name }}" maxlength="100" required id="id_M3_Name">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="id_M3_email">Email:</label> <input type="email" name="M3_email" value="{{ f1.M3_email }}" maxlength="254" required id="id_M3_email">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="id_M3_Mobile_no">Mobile no:</label> <input type="text" name="M3_Mobile_no" value="{{ f1.M3_Mobile_no }}" maxlength="10" required id="id_M3_Mobile_no">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="id_M3_gender">Gender:</label> <select name="M3_gender" required id="id_M3_gender">
+            <option value="{{ f1.M3_gender }}" selected>{{ f1.M3_gender }}</option>
+            <option value="Male" >Male</option>
+            <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          </select>
+        </div>
+    </div>
+    </div>
+    <br>
+
+    <div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+      <div class="form-row">
+          <br>
+          <legend>Member4's Details</legend>
+          <div class="form-group col-md-4">
+            <label for="id_M4_Name">Name:</label> <input type="text" name="M4_Name" value="{{ f1.M4_Name }}" maxlength="100" id="id_M4_Name">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="id_M4_email">Email:</label> <input type="email" name="M4_email" value="{{ f1.M4_email }}" maxlength="254" id="id_M4_email">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="id_M4_Mobile_no">Mobile no:</label> <input type="text" name="M4_Mobile_no" value="{{ f1.M4_Mobile_no }}" maxlength="10" id="id_M4_Mobile_no">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="id_M4_gender" >Gender:</label> <select name="M4_gender" id="id_M4_gender">
+              <option value="{{ f1.M4_gender }}" selected>{{ f1.M4_gender }}</option>
+              <option value="Male" >Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+      </div>
+      </div>
+      <br>
+
+      <div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+        <div class="form-row">
+            <br>
+            <legend>Member5's Details</legend>
+            <div class="form-group col-md-4">
+            <label for="id_M5_Name">Name:</label> <input type="text" name="M5_Name" value="{{ f1.M5_Name }}" maxlength="100" id="id_M5_Name">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="id_M5_email">Email:</label> <input type="email" name="M5_email" value="{{ f1.M5_email }}" maxlength="254" id="id_M5_email">
+            </div>
+            <div class="form-group col-md-4">
+            <label for="id_M5_Mobile_no">Mobile no:</label> <input type="text" value="{{ f1.M5_Mobile_no }}" name="M5_Mobile_no" maxlength="10" id="id_M5_Mobile_no">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="id_M5_gender">Gender:</label> <select name="M5_gender" id="id_M5_gender">
+                <option value="{{ f1.M5_gender }}" selected>{{ f1.M5_gender }}</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+        </div>
+        </div>
+        <br>
+
+        <br>
+        <div class="container" style="background-color: white;border-radius: 7px;border: 2px solid #333;">
+          <div class="form-row">
+              <br>
+              <legend>Mentor's Details</legend>
+              <div class="form-group col-md-4">
+                <label for="id_Mentor_Name">Name:</label> <input type="text" name="Mentor_Name" value="{{ f1.Mentor_Name }}" maxlength="100" required id="id_Mentor_Name">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="id_Mentor_email">Email:</label> <input type="email" name="Mentor_email" value="{{ f1.Mentor_email }}" maxlength="254" required id="id_Mentor_email">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="id_Mentor_Mobile_no">Mobile no:</label> <input type="text" name="Mentor_Mobile_no" value="{{ f1.Mentor_Mobile_no }}" maxlength="10" required id="id_Mentor_Mobile_no">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="id_Mentor_gender">Gender:</label> <select name="Mentor_gender" id="id_Mentor_gender">
+                  <option value="{{ f1.Mentor_gender }}" selected>{{ f1.Mentor_gender }}</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+          </div>
+          </div>
+          <br>
+          <div class="container">
+            <button type="submit" class="btn btn-success btn-lg btn-block" style="width: 20%;">Save</button>
+          </div>
+
+          <br>
+
+
+
+
+
+
+              <!-- reduced size of submit button -->
+              <br>
+            </div>
+            <br>
+
+
+</form>
+
+<br>
+</body>

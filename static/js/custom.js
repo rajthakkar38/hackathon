@@ -1,274 +1,372 @@
-/* JS Document */
+/*---------------------------------------------------------------------
+    File Name: custom.js
+---------------------------------------------------------------------*/
 
-/******************************
+$(function () {
 
-[Table of Contents]
-
-1. Vars and Inits
-2. Set Header
-3. Init Menu
-4. Init Home Slider
-5. Init Scrolling
-6. Init Isotope
-7. Init Testimonials Slider
-8. Init Input
-
-
-******************************/
-
-$(document).ready(function()
-{
 	"use strict";
 
-	/* 
+	/* Preloader
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	1. Vars and Inits
+	setTimeout(function () {
+		$('.loader_bg').fadeToggle();
+	}, 1500);
 
-	*/
+	/* JQuery Menu
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	var header = $('.header');
-	var headerSocial = $('.header_social');
-	var menu = $('.menu');
-	var menuActive = false;
-	var burger = $('.hamburger');
-
-	setHeader();
-
-	$(window).on('resize', function()
-	{
-		setHeader();
-
-		setTimeout(function()
-		{
-			$(window).trigger('resize.px.parallax');
-		}, 375);
+	$(document).ready(function () {
+		$('header nav').meanmenu();
 	});
 
-	$(document).on('scroll', function()
-	{
-		setHeader();
+	/* Tooltip
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 
-	initMenu();
-	initHomeSlider();
-	initIsotope();
-	initTestimonialsSlider();
-	initScrolling();
-	initInput();
+	/* sticky
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	/* 
+	$(document).ready(function () {
+		$(".sticky-wrapper-header").sticky({ topSpacing: 0 });
+	});
 
-	2. Set Header
+	/* Mouseover
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	*/
-
-	function setHeader()
-	{
-		if($(window).scrollTop() > 127)
-		{
-			header.addClass('scrolled');
-			headerSocial.addClass('scrolled');
-		}
-		else
-		{
-			header.removeClass('scrolled');
-			headerSocial.removeClass('scrolled');
-		}
-	}
-
-	/* 
-
-	3. Set Menu
-
-	*/
-
-	function initMenu()
-	{
-		if($('.menu').length)
-		{
-			var menu = $('.menu');
-			if($('.hamburger').length)
-			{
-				burger.on('click', function()
-				{
-					if(menuActive)
-					{
-						closeMenu();
-					}
-					else
-					{
-						openMenu();
-					}
-				});
+	$(document).ready(function () {
+		$(".main-menu ul li.megamenu").mouseover(function () {
+			if (!$(this).parent().hasClass("#wrapper")) {
+				$("#wrapper").addClass('overlay');
 			}
-		}
-		if($('.menu_close').length)
-		{
-			var close = $('.menu_close');
-			close.on('click', function()
-			{
-				if(menuActive)
-				{
-					closeMenu();
+		});
+		$(".main-menu ul li.megamenu").mouseleave(function () {
+			$("#wrapper").removeClass('overlay');
+		});
+	});
+
+	/* NiceScroll
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(".brand-box").niceScroll({
+		cursorcolor: "#9b9b9c",
+	});
+
+	/* NiceSelect
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(document).ready(function () {
+		$('select').niceSelect();
+	});
+
+	/* OwlCarousel - Blog Post slider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(document).ready(function () {
+		var owl = $('.carousel-slider-post');
+		owl.owlCarousel({
+			items: 1,
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			autoplayTimeout: 3000,
+			autoplayHoverPause: true
+		});
+	});
+
+
+	
+	/* OwlCarousel - Banner Rotator Slider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(document).ready(function () {
+		var owl = $('.banner-rotator-slider');
+		owl.owlCarousel({
+			items: 1,
+			loop: true,
+			margin: 10,
+			nav: true,
+			dots: false,
+			navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+			autoplay: true,
+			autoplayTimeout: 3000,
+			autoplayHoverPause: true
+		});
+	});
+
+	/* OwlCarousel - Product Slider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(document).ready(function () {
+		var owl = $('#product-in-slider');
+		owl.owlCarousel({
+			loop: true,
+			nav: true,
+			margin: 10,
+			navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+			responsive: {
+				0: {
+					items: 1
+				},
+				600: {
+					items: 2
+				},
+				960: {
+					items: 3
+				},
+				1200: {
+					items: 4
 				}
-			});
+			}
+		});
+		owl.on('mousewheel', '.owl-stage', function (e) {
+			if (e.deltaY > 0) {
+				owl.trigger('next.owl');
+			} else {
+				owl.trigger('prev.owl');
+			}
+			e.preventDefault();
+		});
+	});
+
+	/* Scroll to Top
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+	$(window).on('scroll', function () {
+		scroll = $(window).scrollTop();
+		if (scroll >= 100) {
+			$("#back-to-top").addClass('b-show_scrollBut')
+		} else {
+			$("#back-to-top").removeClass('b-show_scrollBut')
 		}
-	}
+	});
+	$("#back-to-top").on("click", function () {
+		$('body,html').animate({
+			scrollTop: 0
+		}, 1000);
+	});
 
-	function openMenu()
-	{
-		menu.addClass('active');
-		menuActive = true;
-	}
-
-	function closeMenu()
-	{
-		menu.removeClass('active');
-		menuActive = false;
-	}
-
-	/* 
-
-	4. Init Home Slider
-
-	*/
-
-	function initHomeSlider()
-	{
-		if($('.home_slider').length)
-		{
-			var homeSlider = $('.home_slider');
-			homeSlider.owlCarousel(
-			{
-				items:1,
-				autoplay:false,
-				loop:true,
-				nav:false,
-				dots:false,
-				smartSpeed:1200
-			});
+	/* Contact-form
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+	$.validator.setDefaults({
+		submitHandler: function () {
+			alert("submitted!");
 		}
-	}
+	});
 
-	/* 
+	$(document).ready(function () {
+		$("#contact-form").validate({
+			rules: {
+				firstname: "required",
+				email: {
+					required: true,
+					email: true
+				},
+				lastname: "required",
+				message: "required",
+				agree: "required"
+			},
+			messages: {
+				firstname: "Please enter your firstname",
+				email: "Please enter a valid email address",
+				lastname: "Please enter your lastname",
+				username: {
+					required: "Please enter a username",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				message: "Please enter your Message",
+				agree: "Please accept our policy"
+			},
+			errorElement: "div",
+			errorPlacement: function (error, element) {
+				// Add the `help-block` class to the error element
+				error.addClass("help-block");
 
-	5. Init Scrolling
+				if (element.prop("type") === "checkbox") {
+					error.insertAfter(element.parent("input"));
+				} else {
+					error.insertAfter(element);
+				}
+			},
+			highlight: function (element, errorClass, validClass) {
+				$(element).parents(".col-md-4, .col-md-12").addClass("has-error").removeClass("has-success");
+			},
+			unhighlight: function (element, errorClass, validClass) {
+				$(element).parents(".col-md-4, .col-md-12").addClass("has-success").removeClass("has-error");
+			}
+		});
+	});
 
-	*/
+	/* heroslider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	function initScrolling()
-	{
-		if($('.home_page_nav ul li a').length)
-		{
-			var links = $('.home_page_nav ul li a');
-	    	links.each(function()
-	    	{
-	    		var ele = $(this);
-	    		var target = ele.data('scroll-to');
-	    		ele.on('click', function(e)
-	    		{
-	    			e.preventDefault();
-	    			$(window).scrollTo(target, 1500, {offset: -90, easing: 'easeInOutQuart'});
-	    		});
-	    	});
-		}	
-	}
+	var swiper = new Swiper('.heroslider', {
+		spaceBetween: 30,
+		centeredSlides: true,
+		slidesPerView: 'auto',
+		paginationClickable: true,
+		loop: true,
+		autoplay: {
+			delay: 2500,
+			disableOnInteraction: false,
+		},
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+			dynamicBullets: true
+		},
+	});
 
-	/* 
 
-	6. Init Isotope
+	/* Product Filters
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	*/
-
-	function initIsotope()
-	{
-		if($('.item_grid').length)
-		{
-			var grid = $('.item_grid').isotope({
-				itemSelector: '.item',
-	            getSortData:
-	            {
-	            	price: function(itemElement)
-	            	{
-	            		var priceEle = $(itemElement).find('.destination_price').text().replace( 'From $', '' );
-	            		return parseFloat(priceEle);
-	            	},
-	            	name: '.destination_title a'
-	            },
-	            animationOptions:
-	            {
-	                duration: 750,
-	                easing: 'linear',
-	                queue: false
-	            }
-	        });
+	var swiper = new Swiper('.swiper-product-filters', {
+		slidesPerView: 3,
+		slidesPerColumn: 2,
+		spaceBetween: 30,
+		breakpoints: {
+			1024: {
+				slidesPerView: 3,
+				spaceBetween: 30,
+			},
+			768: {
+				slidesPerView: 2,
+				spaceBetween: 30,
+				slidesPerColumn: 1,
+			},
+			640: {
+				slidesPerView: 2,
+				spaceBetween: 20,
+				slidesPerColumn: 1,
+			},
+			480: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+				slidesPerColumn: 1,
+			}
+		},
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+			dynamicBullets: true
 		}
-	}
+	});
 
-	/* 
+	/* Countdown
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	7. Init Testimonials Slider
+	$('[data-countdown]').each(function () {
+		var $this = $(this),
+			finalDate = $(this).data('countdown');
+		$this.countdown(finalDate, function (event) {
+			var $this = $(this).html(event.strftime(''
+				+ '<div class="time-bar"><span class="time-box">%w</span> <span class="line-b">weeks</span></div> '
+				+ '<div class="time-bar"><span class="time-box">%d</span> <span class="line-b">days</span></div> '
+				+ '<div class="time-bar"><span class="time-box">%H</span> <span class="line-b">hr</span></div> '
+				+ '<div class="time-bar"><span class="time-box">%M</span> <span class="line-b">min</span></div> '
+				+ '<div class="time-bar"><span class="time-box">%S</span> <span class="line-b">sec</span></div>'));
+		});
+	});
 
-	*/
+	/* Deal Slider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	function initTestimonialsSlider()
-	{
-		if($('.testimonials_slider').length)
-		{
-			var testSlider = $('.testimonials_slider');
-			testSlider.owlCarousel(
-			{
-				animateOut: 'fadeOut',
-    			animateIn: 'flipInX',
-				items:1,
-				autoplay:true,
-				loop:true,
-				smartSpeed:1200,
-				dots:false,
-				nav:false
-			});
-		}
-	}
+	$('.deal-slider').slick({
+		dots: false,
+		infinite: false,
+		prevArrow: '.previous-deal',
+		nextArrow: '.next-deal',
+		speed: 500,
+		slidesToShow: 3,
+		slidesToScroll: 3,
+		infinite: false,
+		responsive: [{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 3,
+				slidesToScroll: 2,
+				infinite: true,
+				dots: false
+			}
+		}, {
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 2
+			}
+		}, {
+			breakpoint: 480,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			}
+		}]
+	});
 
-	/* 
+	/* News Slider
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	8. Init Input
+	$('#news-slider').slick({
+		dots: false,
+		infinite: false,
+		prevArrow: '.previous',
+		nextArrow: '.next',
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		responsive: [{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				infinite: true,
+				dots: false
+			}
+		}, {
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			}
+		}, {
+			breakpoint: 480,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			}
+		}]
+	});
 
-	*/
+	/* Fancybox
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	function initInput()
-	{
-		if($('.newsletter_input').length)
-		{
-			var inpt = $('.newsletter_input');
-			inpt.each(function()
-			{
-				var ele = $(this);
-				var border = ele.next();
+	$(".fancybox").fancybox({
+		maxWidth: 1200,
+		maxHeight: 600,
+		width: '70%',
+		height: '70%',
+	});
 
-				ele.focus(function()
-				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
-				ele.blur(function()
-				{
-					border.css({'visibility': "hidden", 'opacity': "0"});
-				});
+	/* Toggle sidebar
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-				ele.on("mouseenter", function()
-				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
+	$(document).ready(function () {
+		$('#sidebarCollapse').on('click', function () {
+			$('#sidebar').toggleClass('active');
+			$(this).toggleClass('active');
+		});
+	});
 
-				ele.on("mouseleave", function()
-				{
-					if(!ele.is(":focus"))
-					{
-						border.css({'visibility': "hidden", 'opacity': "0"});
-					}
-				});
-				
-			});
-		}
-	}
+	/* Product slider 
+	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+	// optional
+	$('#blogCarousel').carousel({
+		interval: 5000
+	});
+
+
 });
