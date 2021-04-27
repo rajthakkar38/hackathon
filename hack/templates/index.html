@@ -1,0 +1,307 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Vishwa-Hackathon</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Travello template project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	<style type="text/css">
+	.chat-box {
+	    position:fixed;
+	    right:20px;
+	    bottom:0;
+	    box-shadow:0 0 0.1em #000;
+	}
+
+	.chat-closed {
+	    width: 250px;
+	    height: 35px;
+	    background: #8bc34a;
+	    line-height: 35px;
+	    font-size: 18px;
+	    text-align: center;
+	    border:1px solid #777;
+	    color: #000;
+	}
+
+	.chat-header {
+	    width: 253px;
+	    height: 35px;
+	    background: #8bc34a;
+	    line-height: 33px;
+	    text-indent: 20px;
+	    border:1px solid #777;
+	    border-bottom:none;
+	}
+
+	.chat-content{
+	    width:253px;
+	    height:310px;
+	    background:#ffffff;
+	    border:1px solid #777;
+	    overflow-y:auto;
+	    word-wrap: break-word;
+	}
+
+	.box{
+	    width:12px;
+	    height:10px;
+	    background:green;
+	    float:left;
+	    position:relative;
+	    top: 11px;
+	    left: 10px;
+	    border:1px solid #ededed;
+	}
+
+	.hide {
+	    display:none;
+	}
+	</style>
+
+</head>
+
+
+<body>
+
+	<div class="super_container">
+
+		<!-- Header -->
+
+		<header class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_content d-flex flex-row align-items-center justify-content-start">
+							<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+								<div class="logo"><a href="{% url 'index' %}">Vishwa-Hackathon</a></div>
+								<nav class="main_nav">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li class="active"><a href="{% url 'index' %}">Home</a></li>
+										
+
+										{% if user.is_authenticated %}
+											<li><a href="profile">Hello, {{user.first_name}}</a></a></li>
+											<li><a href="contactus">Contact</a></li>
+											{% if forms|length == 0 %}
+												<li><a href="team_register">Team Register</a></li>
+											{% endif %}
+											<li><a href="problems">Problem Statements</a></li>
+											<li><a href="logout">Logout</a></li>
+										{% else %}
+											<li><a href="register">Register</a></li>
+											<li><a href="login">Login</a></li>
+										{% endif %}
+									</ul>
+								</nav>
+								<!-- <div class="header_phone ml-auto">Call us: 00-56 445 678 33</div> -->
+
+								<!-- Hamburger -->
+
+								<div class="hamburger ml-auto">
+									<i class="fa fa-bars" aria-hidden="true"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="header_social d-flex flex-row align-items-center justify-content-start">
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-discord" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			</div> -->
+		</header>
+
+		<!-- Menu -->
+
+		<div class="menu">
+			<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+				<div class="menu_logo"><a href="index.html">Vishwa-Hackathon</a></div>
+				<div class="menu_close_container ml-auto">
+					<div class="menu_close">
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			</div>
+			<div class="menu_content">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					{% if user.is_authenticated %}
+					<li><a href="profile">Hello, {{user.first_name}}</a></a></li>
+					{% if forms|length == 0 %}
+						<li><a href="team_register">Team Register</a></li>
+					{% endif %}
+						<li><a href="problems">Problem Statements</a></li>
+						<li><a href="logout">Logout</a></li>
+					{% else %}
+							<li><a href="register">Register</a></li>
+							<li><a href="login">Login</a></li>
+					{% endif %}
+					<li><a href="contactus">Contact</a></li>
+
+				</ul>
+			</div>
+			<!-- <div class="menu_social">
+				<div class="menu_phone ml-auto">Call us: 00-56 445 678 33</div>
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			</div> -->
+		</div>
+
+		<!-- Home -->
+
+		<div class="home">
+
+			<!-- Home Slider -->
+			<div class="home_slider_container">
+				<div class="owl-carousel owl-theme home_slider">
+
+					<!-- Slide -->
+					<div class="owl-item">
+						<div class="background_image"
+							style="background-image:url({% static 'images/back.png' %})"></div>
+						<div class="home_slider_content_container">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="home_slider_content">
+											<div class="home_title">
+												<h2>Vishwa-Hackathon</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide -->
+					<div class="owl-item">
+						<div class="background_image"
+							style="background-image:url({% static 'images/back.png' %})"></div>
+						<div class="home_slider_content_container">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="home_slider_content">
+											<div class="home_title">
+												<h2>Vishwa-Hackathon</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Slide -->
+					<div class="owl-item">
+						<div class="background_image"
+							style="background-image:url({% static 'images/back.png' %})"></div>
+						<div class="home_slider_content_container">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="home_slider_content">
+											<div class="home_title">
+												<h2>Vishwa-Hackathon</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="home_page_nav">
+					<ul class="d-flex flex-column align-items-end justify-content-end">
+						<li>Registration Starts On<span>01</span></li>
+						<li>Registration Ends On<span>02</span></li>
+						<li>Hackathon Starts On<span>03</span></li>
+						<li>Hackathon Ends On<span>04</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="home_page_nav">
+			<div class="chat-box">
+			<div class="chat-closed"> Chat Now </div>
+			<div class="chat-header hide" style="color:black;" ><div class="box"></div>Online Support</div>
+			<div class="chat-content hide">
+				<iframe src='https://webchat.botframework.com/embed/sce-01?s=irvP-k8hF8g.g4MjuYV5bAvvWll4gCOP3X501dLGueRAp0SPCY9app0'
+				style='width: 250px; height: 300px;border:0.5px solid #ffffff;'></iframe>
+			</div>
+			</div>
+		</div>
+
+
+
+
+
+	</div>
+
+
+
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			$(".chat-closed").on("click",function(e){
+					$(".chat-header,.chat-content").removeClass("hide");
+					$(this).addClass("hide");
+			});
+
+			$(".chat-header").on("click",function(e){
+					$(".chat-header,.chat-content").addClass("hide");
+					$(".chat-closed").removeClass("hide");
+			});
+	});
+	</script>
+
+						<script src="{% static 'js/jquery-3.2.1.min.js' %}">
+						</script>
+						<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+						<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+						<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+						<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+						<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+						<script src="{% static 'plugins/easing/easing.js' %}"></script>
+						<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+						<script src="{% static 'js/custom.js' %}"></script>
+
+
+
+</body>
+
+
+
+</html>
